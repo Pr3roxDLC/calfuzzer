@@ -1,4 +1,9 @@
-package javato.activetesting.activechecker;
+package javato.activetesting;
+
+import javato.activetesting.activechecker.ActiveChecker;
+import javato.activetesting.analysis.AnalysisImpl;
+import javato.activetesting.analysis.Observer;
+import javato.activetesting.common.Parameters;
 
 /**
  * Copyright (c) 2007-2008,
@@ -32,44 +37,51 @@ package javato.activetesting.activechecker;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class Semaphore {
-    public int counter;
-    public int waitTime;
+public class EmptyAnalysisNoMemory extends AnalysisImpl {
 
-    public Semaphore() {
-        this(0);
-        waitTime = 0;
+    public void initialize() {
+        synchronized (ActiveChecker.lock) {}
     }
 
-    public Semaphore(int i) {
-        if (i < 0) throw new IllegalArgumentException(i + " < 0");
-        counter = i;
+    public void lockBefore(Integer iid, Integer thread, Integer lock, Object actualLock) {
+        synchronized (ActiveChecker.lock) {}
     }
 
-    public synchronized void release(int waitTime) {
-        counter++;
-        this.waitTime = waitTime;
-        this.notify();
+    public void unlockAfter(Integer iid, Integer thread, Integer lock) {
+        synchronized (ActiveChecker.lock) {}
     }
 
-    public synchronized void acquire() throws InterruptedException {
-        while (counter <= 0) {
-            //System.out.println("waiting in acqure, count:  " + this.counter);
-            this.wait();
-            //throw new InterruptedException();
-        }
-        counter--;
-        if (waitTime > 0) {
-            try {
-                Thread.sleep(waitTime);
-            } catch (InterruptedException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            }
-        }
+    public void newExprAfter(Integer iid, Integer object, Integer objOnWhichMethodIsInvoked) {
     }
 
-    public synchronized void decrement(int i) {
-        counter = counter - i;
+    public void methodEnterBefore(Integer iid, Integer thread) {
+    }
+
+    public void methodExitAfter(Integer iid, Integer thread) {
+    }
+
+    public void startBefore(Integer iid, Integer parent, Integer child) {
+    }
+
+    public void waitAfter(Integer iid, Integer thread, Integer lock) {
+    }
+
+    public void notifyBefore(Integer iid, Integer thread, Integer lock) {
+    }
+
+    public void notifyAllBefore(Integer iid, Integer thread, Integer lock) {
+    }
+
+    public void joinAfter(Integer iid, Integer parent, Integer child) {
+    }
+
+    public void readBefore(Integer iid, Integer thread, Long memory, boolean isVolatile) {
+    }
+
+    public void writeBefore(Integer iid, Integer thread, Long memory, boolean isVolatile) {
+    }
+
+    public void finish() {
+        synchronized (ActiveChecker.lock) {}
     }
 }
-

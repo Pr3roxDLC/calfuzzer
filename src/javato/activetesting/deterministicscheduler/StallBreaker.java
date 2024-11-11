@@ -70,17 +70,15 @@ public class StallBreaker extends Thread {
                         for (int j=0; j < tids.length;j++) {
                             System.err.println("Thread "+tbean.getThreadInfo(tids[j]));
                         }
-                        printThreadState(true);
-                        System.exit(1);
+                        System.err.println("Finished printing deadlocks, will quit!");
+                        Runtime.getRuntime().halt(0);
                     }
-                    //breakAnyStall();
                 }
                 synchronized (sched) {
                     if (sched.isActive()) {
                         Thread t = sched.getCurrentRunningThread();
                         if (t!=null && t == oldThread) {
                             if (!sched.getAndUnsetTouched(t)) {
-                                //System.out.println("&&&&&&&&&&&&&&&& bad "+t+sched.waitingThreadsFIFO);
                                 sched.enableAWaitingThread();
                             }
                         }

@@ -47,6 +47,8 @@ public class HybridAnalysis extends AnalysisImpl {
     private LockSetTracker lsTracker;
     private IgnoreRentrantLock ignoreRentrantLock;
     private HybridRaceTracker eb;
+    private int numAcqEvents, numRelEvents, numReadEvents, numWriteEvents, numForkEvents, numJoinEvents;
+    private boolean printEvents = true;
 
     public void initialize() {
         //ciTracker = new ContextIndexingTracker();
@@ -55,6 +57,9 @@ public class HybridAnalysis extends AnalysisImpl {
             lsTracker = new LockSetTracker();
             ignoreRentrantLock = new IgnoreRentrantLock();
             eb = new HybridRaceTracker();
+            numAcqEvents = numRelEvents = numReadEvents = numWriteEvents = numForkEvents = numJoinEvents = 0;
+            if (printEvents)
+                System.out.println("initialize()");
         }
     }
 
@@ -67,6 +72,9 @@ public class HybridAnalysis extends AnalysisImpl {
 //                    eb.checkRace(iid, thread, mem , false, vcTracker.getVectorClock(thread), ls,true,false);
 //                    eb.addEvent(iid, thread, mem, false, vcTracker.getVectorClock(thread), ls);
 //                }
+                numAcqEvents++;
+                if (printEvents)
+                    System.out.println("lockBefore("+iid+","+thread+","+lock+")");
                 boolean isDeadlock = lsTracker.lockBefore(iid, thread, lock);
             }
         }
@@ -93,6 +101,10 @@ public class HybridAnalysis extends AnalysisImpl {
         synchronized (ActiveChecker.lock) {
             if (ignoreRentrantLock.unlockAfter(thread, lock)) {
                 lsTracker.unlockAfter(thread);
+                
+                numRelEvents++;
+                if (printEvents)
+                    System.out.println("unlockAfter("+iid+","+thread+","+lock+")");
             }
         }
     }
@@ -112,6 +124,10 @@ public class HybridAnalysis extends AnalysisImpl {
     public void startBefore(Integer iid, Integer parent, Integer child) {
         synchronized (ActiveChecker.lock) {
             vcTracker.startBefore(parent, child);
+            
+            numForkEvents++;
+            if (printEvents)
+                System.out.println("startBefore("+iid+","+parent+","+child+")");
         }
     }
 
@@ -158,6 +174,10 @@ public class HybridAnalysis extends AnalysisImpl {
     public void joinAfter(Integer iid, Integer parent, Integer child) {
         synchronized (ActiveChecker.lock) {
             vcTracker.joinAfter(parent, child);
+            
+            numJoinEvents++;
+            if (printEvents)
+                System.out.println("joinAfter("+iid+","+parent+","+child+")");
         }
     }
 
@@ -166,6 +186,10 @@ public class HybridAnalysis extends AnalysisImpl {
             LockSet ls = lsTracker.getLockSet(thread);
             eb.checkRace(iid, thread, memory, true, vcTracker.getVectorClock(thread), ls, false,isVolatile);
             eb.addEvent(iid, thread, memory, true, vcTracker.getVectorClock(thread), ls);
+            
+            numReadEvents++;
+            if (printEvents)
+                System.out.println("readBefore("+iid+","+thread+","+memory+")");
         }
     }
 
@@ -174,11 +198,26 @@ public class HybridAnalysis extends AnalysisImpl {
             LockSet ls = lsTracker.getLockSet(thread);
             eb.checkRace(iid, thread, memory, false, vcTracker.getVectorClock(thread), ls, false,isVolatile);
             eb.addEvent(iid, thread, memory, false, vcTracker.getVectorClock(thread), ls);
+            
+            numWriteEvents++;
+            if (printEvents)
+                System.out.println("writeBefore("+iid+","+thread+","+memory+")");
         }
     }
 
     public void finish() {
         synchronized (ActiveChecker.lock) {
+            if (printEvents)
+                System.out.println("finish()");
+            System.out.println("Num acquire events: " + numAcqEvents);
+            System.out.println("Num release events: " + numRelEvents);
+            System.out.println("Num write events: " + numWriteEvents);
+            System.out.println("Num read events: " + numReadEvents);
+            System.out.println("Num fork events: " + numForkEvents);
+            System.out.println("Num join events: " + numJoinEvents);
+            int numTotalEvents = numAcqEvents + numRelEvents + numWriteEvents + numReadEvents + numForkEvents + numJoinEvents;
+            System.out.println("Num total events: " + numTotalEvents);
+
             eb.dumpRaces();
         }
     }

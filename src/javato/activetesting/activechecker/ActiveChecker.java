@@ -97,18 +97,30 @@ public class ActiveChecker {
 
     final public static void blockIfRequired() {
         Pair p = (Pair) threadToSemaphoreAndTime.remove(Thread.currentThread());
+        //System.out.println("blockIfRequired called");
         if (p != null) {
+            //System.out.println("p is not null");
+
             if (p.waitTime > 0) {
+                //System.out.println("p waitTime: " + p.waitTime);
+
                 try {
                     Thread.sleep(p.waitTime);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             } else {
+                //System.out.println("stall breaker break stall! ");
+
                 StallBreaker.breakAnyStall();
+                //System.out.println("stall breaker after call ");
+
                 try {
+                    //System.out.println("p sem acquire!");
                     p.sem.acquire();
+                    //System.out.println("p sem acquiredd!");
                 } catch (InterruptedException e) {
+                    //System.out.println("p InterruptedException!");
                     blockedThreads.remove(p.checker);
                     dirty.set(true);
                 }

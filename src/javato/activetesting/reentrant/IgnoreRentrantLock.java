@@ -1,5 +1,7 @@
 package javato.activetesting.reentrant;
 
+import java.util.Set;
+
 /**
  * Copyright (c) 2007-2008,
  * Koushik Sen    <ksen@cs.berkeley.edu>
@@ -46,6 +48,39 @@ public class IgnoreRentrantLock {
      */
     public boolean lockBefore(Integer thread, Integer lock) {
         return ((LockSetWithCount) lockSet.get(thread)).add(lock);
+    }
+
+    /**
+     * @param thread
+     * @param lock   is the id of the object about to be acquired
+     * @return true iff the thread will actually acquire the lock (and not re-acquire it.)
+     */
+    public boolean isReentrant(Integer thread, Integer lock) {
+        if (((LockSetWithCount) lockSet.get(thread)).getLockSet().contains(lock))
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * @param thread
+     * @param lock   is the id of the object about to be acquired
+     * @return true iff the thread will actually acquire the lock (and not re-acquire it.)
+     */
+    public boolean canLock(Integer thread, Integer lock, Set<Integer> threadSet) {
+        for (Integer threadPrime : threadSet) {
+            if (thread.equals(threadPrime))
+                continue;
+            
+            // System.out.println("\tthread: " + thread + ", lock: " + lock + ", threadPrime: " + threadPrime);
+            // for (Integer locks : ((LockSetWithCount) lockSet.get(threadPrime)).getLockSet()) {
+            //     System.out.println("\theld lock: " + locks);
+            // }
+
+            if (((LockSetWithCount) lockSet.get(threadPrime)).getLockSet().contains(lock))
+                return false;
+        }
+        return true;
     }
 
     /**

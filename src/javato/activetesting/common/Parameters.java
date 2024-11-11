@@ -64,6 +64,7 @@ public class Parameters {
         = Boolean.getBoolean("javato.track.locals.deterministic");
 
     // various files for persistent data and logs
+    public static final String execNumberFile = "/root/table2/calfuzzer/execNumberFile.txt";
     public static final String iidToLineMapFile = "iidToLine.map";
     public static final String usedObjectId = "javato.usedids";
     public static final String ERROR_STAT_FILE = System.getProperty("javato.activetesting.errorstat.file", "error.stat");

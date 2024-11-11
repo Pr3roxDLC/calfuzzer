@@ -117,6 +117,7 @@ public class GoodlockDS {
     public int dumpDeadlocks() {
         if (deadlocks == null)
             findDeadlocks();
+        printDeadlocks();
         DeadlockCycleInfo ret = new DeadlockCycleInfo(deadlocks.size());
         for (Path path : deadlocks) {
             ret.addACycle();
