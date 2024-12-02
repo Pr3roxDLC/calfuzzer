@@ -141,17 +141,17 @@
             <available file="${javato.work.dir}/tmpbootclasses"/>
             <then>
                 <property name="jvm_args"
-                          value="-ea -Xbootclasspath/p:tmpbootclasses:${javato.home.dir}/classes"/>
+                          value="-ea -Xbootclasspath/p:tmpbootclasses:${javato.home.dir}/classes -agentlib:jdwp=transport=dt_socket,server=n,address=CAS-N03767.home.cas.de:5005,suspend=y,onthrow=java.lang.Exception,onuncaught=y,launch=cmd"/>
             </then>
             <else>
-                <property name="jvm_args" value="-ea"/>
+                <property name="jvm_args" value="-ea "/>
             </else>
         </if>
         <stopwatch name="timer" action="start"/>
         <java classname="${javato.app.main.class}"
               fork="true" dir="${javato.work.dir}" maxmemory="1024m">
             <arg line="${javato.app.args}"/>
-            <jvmarg line="${jvm_args}"/>
+            <jvmarg line="${jvm_args} "/>
             <!--            <sysproperty key="javato.deadlock.goodlock" value="false"/> -->
             <syspropertyset>
                 <propertyref builtin="all"/>
@@ -170,6 +170,7 @@
     <target name="active-loop" description="run active checker repeatedly">
         <fail if="javato.activetesting.errornum"/>
         <fail if="javato.activetesting.errorlist"/>
+        <echo file="${javato.activetesting.errorlist.file}" append="true"/>
         <loadfile property="javato.activetesting.errorlist"
                   srcFile="${javato.activetesting.errorlist.file}">
             <filterchain>
@@ -178,7 +179,7 @@
         </loadfile>
         <if>
             <isset property="javato.activetesting.errorlist"/>
-            <then> 
+            <then>
                 <for param="trialnum" list="${javato.activetesting.trialnum.list}">
                     <sequential>
                         <echo message="Iteration: @{trialnum}"/>
@@ -1237,7 +1238,7 @@
              <param name="test.output.file" value="deadlock8.txt"/>
          </antcall>
     </target>
-	
+
     <target name="test_tsp_t">
         <property name="javato.work.dir" value="${benchdir}/tsp"/>
         <property name="javato.app.main.class" value="benchmarks.tsp.Tsp"/>
@@ -1354,7 +1355,7 @@
 		<property name="javato.work.dir" value="${javabenchdir}/lucene-2.3.0"/>
         <property name="javato.app.main.class" value="TestDeadLock"/>
 		<property name="javato.app.class.path" value="${javato.work.dir}/classes:${javato.work.dir}/build/classes/java:${javato.work.dir}/lib/junit-4.7.jar"/>
-        <!--<property name="javato.app.instr.dir" 
+        <!--<property name="javato.app.instr.dir"
 				value="${javato.work.dir}/build/classes/java"/>-->
         <property name="javato.instops" value="-i org.apache.lucene -x java"/>
 		<!--<ant dir="${javato.work.dir}"/>-->
@@ -1396,7 +1397,7 @@
         <ant dir="${javato.work.dir}"/>
         <antcall target="predictest-analysis"/>
     </target>
-	
+
     <target name="t_test_pool">
         <property name="javato.work.dir" value="${javabenchdir}/commons-pool-1.5-src"/>
         <property name="javato.app.class.path"
@@ -1407,7 +1408,7 @@
         <ant dir="${javato.work.dir}"/>
         <antcall target="predictest-analysis"/>
     </target>
-	
+
 	<target name="t_test_jigsaw">
         <property name="javato.work.dir" value="${javabenchdir}/jigsaw/Jigsaw"/>
         <property name="javato.app.instr.dir"
@@ -2368,7 +2369,7 @@
     </target>
 
     <target name="test_determinism_pj_mandelbrot_at">
-        <property name="javato.work.dir" value="${benchdir}/determinism/pj/edu/rit/smp/fractal"/>
+        <property name="javato.work.dir" value="/benchmarks/determinism/pj/edu/ritsmp/fractal"/>
         <property name="javato.app.instr.path" value="${javato.work.dir}/classes"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.app.main.class" value="benchmarks.determinism.pj.edu.ritsmp.fractal.MandelbrotSetSmp"/>
@@ -2390,7 +2391,7 @@
     </target>
 
     <target name="test_determinism_pj_montecarlo_pi_at">
-        <property name="javato.work.dir" value="${benchdir}/determinism/pj/edu/rit/smp/monte"/>
+        <property name="javato.work.dir" value="/benchmarks/determinism/pj/edu/ritsmp/monte"/>
         <property name="javato.app.instr.path" value="${javato.work.dir}/classes"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.app.main.class" value="benchmarks.determinism.pj.edu.ritsmp.monte.PiSmp"/>
@@ -2412,7 +2413,7 @@
     </target>
 
     <target name="test_determinism_pj_montecarlo_pi3_at">
-        <property name="javato.work.dir" value="${benchdir}/determinism/pj/edu/rit/smp/monte"/>
+        <property name="javato.work.dir" value="/benchmarks/determinism/pj/edu/ritsmp/monte"/>
         <property name="javato.app.instr.path" value="${javato.work.dir}/classes"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.app.main.class" value="benchmarks.determinism.pj.edu.ritsmp.monte.PiSmp3"/>
@@ -2434,7 +2435,7 @@
     </target>
 
     <target name="test_determinism_pj_floyd_row2_at">
-        <property name="javato.work.dir" value="${benchdir}/determinism/pj/edu/rit/smp/network"/>
+        <property name="javato.work.dir" value="/benchmarks/determinism/pj/edu/ritsmp/network"/>
         <property name="javato.app.instr.path" value="${javato.work.dir}/classes"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.app.main.class" value="benchmarks.determinism.pj.edu.ritsmp.network.FloydSmpRow2"/>
@@ -2456,7 +2457,7 @@
     </target>
 
     <target name="test_determinism_pj_floyd_col2_at">
-        <property name="javato.work.dir" value="${benchdir}/determinism/pj/edu/rit/smp/network"/>
+        <property name="javato.work.dir" value="/benchmarks/determinism/pj/edu/ritsmp/network"/>
         <property name="javato.app.instr.path" value="${javato.work.dir}/classes"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.app.main.class" value="benchmarks.determinism.pj.edu.ritsmp.network.FloydSmpCol2"/>
@@ -2478,7 +2479,7 @@
     </target>
 
     <target name="test_determinism_pj_findkey3_at">
-        <property name="javato.work.dir" value="${benchdir}/determinism/pj/edu/rit/smp/keysearch"/>
+        <property name="javato.work.dir" value="/benchmarks/determinism/pj/edu/ritsmp/keysearch"/>
         <property name="javato.app.instr.path" value="${javato.work.dir}/classes"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.app.main.class" value="benchmarks.determinism.pj.edu.ritsmp.keysearch.FindKeySmp3"/>
@@ -2500,7 +2501,7 @@
     </target>
 
     <target name="test_determinism_pj_phylo_bnb_at">
-        <property name="javato.work.dir" value="${benchdir}/determinism/pj/edu/rit/compbio/phyl"/>
+        <property name="javato.work.dir" value="/benchmarks/determinism/pj/edu/ritcompbio/phyl"/>
         <property name="javato.app.instr.path" value="${javato.work.dir}/classes"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.app.main.class" value="benchmarks.determinism.pj.edu.ritcompbio.phyl.PhylogenyParsBnbSmp"/>
@@ -2624,7 +2625,7 @@
     </target>
 
     <target name="test_determinism_pj_mandelbrot">
-        <property name="javato.work.dir" value="${benchdir}/determinism/pj/edu/rit/smp/fractal"/>
+        <property name="javato.work.dir" value="/benchmarks/determinism/pj/edu/ritsmp/fractal"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.app.main.class" value="benchmarks.determinism.pj.edu.ritsmp.fractal.MandelbrotSetSmp"/>
         <property name="javato.app.args" value="400 400 -0.5 0 100 2000 0.125 tmp.pjg"/>
@@ -2634,7 +2635,7 @@
     </target>
 
     <target name="test_determinism_pj_montecarlo_pi">
-        <property name="javato.work.dir" value="${benchdir}/determinism/pj/edu/rit/smp/monte"/>
+        <property name="javato.work.dir" value="/benchmarks/determinism/pj/edu/ritsmp/monte"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.app.main.class" value="benchmarks.determinism.pj.edu.ritsmp.monte.PiSmp"/>
         <property name="javato.app.args" value="19840212 10000"/>
@@ -2644,7 +2645,7 @@
     </target>
 
     <target name="test_determinism_pj_montecarlo_pi3">
-        <property name="javato.work.dir" value="${benchdir}/determinism/pj/edu/rit/smp/monte"/>
+        <property name="javato.work.dir" value="/benchmarks/determinism/pj/edu/ritsmp/monte"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.app.main.class" value="benchmarks.determinism.pj.edu.ritsmp.monte.PiSmp3"/>
         <property name="javato.app.args" value="19840212 10000"/>
@@ -2654,7 +2655,7 @@
     </target>
 
     <target name="test_determinism_pj_floyd_row2">
-        <property name="javato.work.dir" value="${benchdir}/determinism/pj/edu/rit/smp/network"/>
+        <property name="javato.work.dir" value="/benchmarks/determinism/pj/edu/ritsmp/network"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.app.main.class" value="benchmarks.determinism.pj.edu.ritsmp.network.FloydSmpRow2"/>
         <property name="javato.app.args" value="19840212 0.25 50"/>
@@ -2664,7 +2665,7 @@
     </target>
 
     <target name="test_determinism_pj_floyd_col2">
-        <property name="javato.work.dir" value="${benchdir}/determinism/pj/edu/rit/smp/network"/>
+        <property name="javato.work.dir" value="/benchmarks/determinism/pj/edu/ritsmp/network"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.app.main.class" value="benchmarks.determinism.pj.edu.ritsmp.network.FloydSmpCol2"/>
         <property name="javato.app.args" value="19840212 0.25 50"/>
@@ -2674,7 +2675,7 @@
     </target>
 
     <target name="test_determinism_pj_findkey3">
-        <property name="javato.work.dir" value="${benchdir}/determinism/pj/edu/rit/smp/keysearch"/>
+        <property name="javato.work.dir" value="/benchmarks/determinism/pj/edu/ritsmp/keysearch"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.app.main.class" value="benchmarks.determinism.pj.edu.ritsmp.keysearch.FindKeySmp3"/>
         <property name="javato.app.args" value="48656c6c6f2c205543204265726b656c 84646e350250cdaf3a9aacf16bddf59f deadbeefdeadbeef0123456789abcdef0000face00face0deadbeef0fea00000 20"/>
@@ -2684,7 +2685,7 @@
     </target>
 
     <target name="test_determinism_pj_phylo_bnb">
-        <property name="javato.work.dir" value="${benchdir}/determinism/pj/edu/rit/compbio/phyl"/>
+        <property name="javato.work.dir" value="/benchmarks/determinism/pj/edu/ritcompbio/phyl"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.app.main.class" value="benchmarks.determinism.pj.edu.ritcompbio.phyl.PhylogenyParsBnbSmp"/>
         <property name="javato.app.args" value="iguana16.phy . 16 10"/>
@@ -2818,7 +2819,7 @@
     </target>
 
     <target name="infer_determinism_pj_mandelbrot_same">
-        <property name="javato.work.dir" value="${benchdir}/detinfer/pj/edu/rit/smp/fractal"/>
+        <property name="javato.work.dir" value="/benchmarks/detinfer/pj/edu/ritsmp/fractal"/>
         <property name="javato.app.main.class" value="benchmarks.detinfer.pj.edu.ritsmp.fractal.MandelbrotSetSmp"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.determinism.infer" value="true"/>
@@ -2832,7 +2833,7 @@
     </target>
 
     <target name="infer_determinism_pj_mandelbrot_diff">
-        <property name="javato.work.dir" value="${benchdir}/detinfer/pj/edu/rit/smp/fractal"/>
+        <property name="javato.work.dir" value="/benchmarks/detinfer/pj/edu/ritsmp/fractal"/>
         <property name="javato.app.main.class" value="benchmarks.detinfer.pj.edu.ritsmp.fractal.MandelbrotSetSmp"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.determinism.infer" value="true"/>
@@ -2846,7 +2847,7 @@
     </target>
 
     <target name="infer_determinism_pj_montecarlo_pi_same">
-        <property name="javato.work.dir" value="${benchdir}/detinfer/pj/edu/rit/smp/monte"/>
+        <property name="javato.work.dir" value="/benchmarks/detinfer/pj/edu/ritsmp/monte"/>
         <property name="javato.app.main.class" value="benchmarks.detinfer.pj.edu.ritsmp.monte.PiSmp"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.determinism.infer" value="true"/>
@@ -2860,7 +2861,7 @@
     </target>
 
     <target name="infer_determinism_pj_montecarlo_pi_diff">
-        <property name="javato.work.dir" value="${benchdir}/detinfer/pj/edu/rit/smp/monte"/>
+        <property name="javato.work.dir" value="/benchmarks/detinfer/pj/edu/ritsmp/monte"/>
         <property name="javato.app.main.class" value="benchmarks.detinfer.pj.edu.ritsmp.monte.PiSmp"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.determinism.infer" value="true"/>
@@ -2874,7 +2875,7 @@
     </target>
 
     <target name="infer_determinism_pj_montecarlo_pi3_same">
-        <property name="javato.work.dir" value="${benchdir}/detinfer/pj/edu/rit/smp/monte"/>
+        <property name="javato.work.dir" value="/benchmarks/detinfer/pj/edu/ritsmp/monte"/>
         <property name="javato.app.main.class" value="benchmarks.detinfer.pj.edu.ritsmp.monte.PiSmp3"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.determinism.infer" value="true"/>
@@ -2888,7 +2889,7 @@
     </target>
 
     <target name="infer_determinism_pj_montecarlo_pi3_diff">
-        <property name="javato.work.dir" value="${benchdir}/detinfer/pj/edu/rit/smp/monte"/>
+        <property name="javato.work.dir" value="/benchmarks/detinfer/pj/edu/ritsmp/monte"/>
         <property name="javato.app.main.class" value="benchmarks.detinfer.pj.edu.ritsmp.monte.PiSmp3"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.determinism.infer" value="true"/>
@@ -2902,7 +2903,7 @@
     </target>
 
     <target name="infer_determinism_pj_floyd_row2_same">
-        <property name="javato.work.dir" value="${benchdir}/detinfer/pj/edu/rit/smp/network"/>
+        <property name="javato.work.dir" value="/benchmarks/detinfer/pj/edu/ritsmp/network"/>
         <property name="javato.app.main.class" value="benchmarks.detinfer.pj.edu.ritsmp.network.FloydSmpRow2"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.determinism.infer" value="true"/>
@@ -2916,7 +2917,7 @@
     </target>
 
     <target name="infer_determinism_pj_floyd_row2_diff">
-        <property name="javato.work.dir" value="${benchdir}/detinfer/pj/edu/rit/smp/network"/>
+        <property name="javato.work.dir" value="/benchmarks/detinfer/pj/edu/ritsmp/network"/>
         <property name="javato.app.main.class" value="benchmarks.detinfer.pj.edu.ritsmp.network.FloydSmpRow2"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.determinism.infer" value="true"/>
@@ -2930,7 +2931,7 @@
     </target>
 
     <target name="infer_determinism_pj_floyd_col2_same">
-        <property name="javato.work.dir" value="${benchdir}/detinfer/pj/edu/rit/smp/network"/>
+        <property name="javato.work.dir" value="/benchmarks/detinfer/pj/edu/ritsmp/network"/>
         <property name="javato.app.main.class" value="benchmarks.detinfer.pj.edu.ritsmp.network.FloydSmpCol2"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.determinism.infer" value="true"/>
@@ -2944,7 +2945,7 @@
     </target>
 
     <target name="infer_determinism_pj_floyd_col2_diff">
-        <property name="javato.work.dir" value="${benchdir}/detinfer/pj/edu/rit/smp/network"/>
+        <property name="javato.work.dir" value="/benchmarks/detinfer/pj/edu/ritsmp/network"/>
         <property name="javato.app.main.class" value="benchmarks.detinfer.pj.edu.ritsmp.network.FloydSmpCol2"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.determinism.infer" value="true"/>
@@ -2958,7 +2959,7 @@
     </target>
 
     <target name="infer_determinism_pj_findkey3_same">
-        <property name="javato.work.dir" value="${benchdir}/detinfer/pj/edu/rit/smp/keysearch"/>
+        <property name="javato.work.dir" value="/benchmarks/detinfer/pj/edu/ritsmp/keysearch"/>
         <property name="javato.app.main.class" value="benchmarks.detinfer.pj.edu.ritsmp.keysearch.FindKeySmp3"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.determinism.infer" value="true"/>
@@ -2972,7 +2973,7 @@
     </target>
 
     <target name="infer_determinism_pj_findkey3_diff">
-        <property name="javato.work.dir" value="${benchdir}/detinfer/pj/edu/rit/smp/keysearch"/>
+        <property name="javato.work.dir" value="/benchmarks/detinfer/pj/edu/ritsmp/keysearch"/>
         <property name="javato.app.main.class" value="benchmarks.detinfer.pj.edu.ritsmp.keysearch.FindKeySmp3"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.determinism.infer" value="true"/>
@@ -2986,7 +2987,7 @@
     </target>
 
     <target name="infer_determinism_pj_phylo_bnb_same">
-        <property name="javato.work.dir" value="${benchdir}/detinfer/pj/edu/rit/compbio/phyl"/>
+        <property name="javato.work.dir" value="/benchmarks/detinfer/pj/edu/ritcompbio/phyl"/>
         <property name="javato.app.main.class" value="benchmarks.detinfer.pj.edu.ritcompbio.phyl.PhylogenyParsBnbSmp"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.determinism.infer" value="true"/>
@@ -3000,7 +3001,7 @@
     </target>
 
     <target name="infer_determinism_pj_phylo_bnb_diff">
-        <property name="javato.work.dir" value="${benchdir}/detinfer/pj/edu/rit/compbio/phyl"/>
+        <property name="javato.work.dir" value="/benchmarks/detinfer/pj/edu/ritcompbio/phyl"/>
         <property name="javato.app.main.class" value="benchmarks.detinfer.pj.edu.ritcompbio.phyl.PhylogenyParsBnbSmp"/>
         <property name="javato.app.class.path" value="${javato.work.dir}/classes"/>
         <property name="javato.determinism.infer" value="true"/>

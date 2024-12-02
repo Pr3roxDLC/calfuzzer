@@ -35,10 +35,7 @@
 package test;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class TestClasses {
 
@@ -48,7 +45,7 @@ public class TestClasses {
 
     public static class A implements Serializable {
         public A() {
-            m = new TreeMap<B,A>();
+            m = new HashMap<>();
             x = 7;
             b1 = b2 = null;
             o1 = o2 = o3 = null;

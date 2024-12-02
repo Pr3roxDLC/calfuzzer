@@ -7,6 +7,8 @@
 
 package benchmarks.instrumented.java15.util;
 
+import java.util.Objects;
+
 /**
  * This class implements the <tt>Set</tt> interface, backed by a
  * <tt>TreeMap</tt> instance.  This class guarantees that the sorted set will
@@ -248,9 +250,9 @@ public class TreeSet<E>
             m instanceof TreeMap) {
             SortedSet<Map.Entry<E, Object>> set = (SortedSet<Map.Entry<E, Object>>) (SortedSet) c;
             TreeMap<E,Object> map = (TreeMap<E, Object>) m;
-            Comparator<? super E> cc = (Comparator<E>) set.comparator();
-            Comparator<? super E> mc = map.comparator();
-            if (cc==mc || (cc != null && cc.equals(mc))) {
+            Comparator<?> cc = set.comparator();
+            Comparator<?> mc = map.comparator();
+            if (Objects.equals(cc, mc)) {
                 map.addAllForTreeSet(set, PRESENT);
                 return true;
             }

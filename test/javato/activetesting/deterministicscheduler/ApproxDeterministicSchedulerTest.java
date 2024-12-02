@@ -54,17 +54,17 @@ public class ApproxDeterministicSchedulerTest {
     }
 
     private void mult() {
-        //System.out.print("*");
+        System.out.print("*");
         setX(getX()*1.52f);
     }
 
     private void add() {
-        //System.out.print("+");
+        System.out.print("+");
         setX(getX()+2.36f);
     }
 
     private void div() {
-        //System.out.print("/");
+        System.out.print("/");
         setX(getX()/1.21f);
     }
 

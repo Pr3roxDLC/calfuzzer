@@ -1,5 +1,6 @@
 package javato.activetesting.instrumentor;
 
+import benchmarks.instrumented.java15.util.Arrays;
 import javato.activetesting.common.Parameters;
 import javato.instrumentor.RecursiveVisitor;
 import javato.instrumentor.TransformClass;
@@ -39,6 +40,8 @@ import javato.instrumentor.Visitor;
  */
 public class InstrumentorForActiveTesting {
     public static void main(String[] args) {
+        System.setProperty("sun.boot.class.path", "C:/Users/tim.heller/.jdks/jdk1.6.0_45/jre/lib/rt.jar");
+        System.setProperty("java.ext.dirs", "C:/Users/tim.heller/.jdks/jdk1.6.0_45/jre/lib/rt.jar");
         RecursiveVisitor vv = new RecursiveVisitor(null);
         VisitorForActiveTesting pv = new VisitorForActiveTesting(vv);
         vv.setNextVisitor(pv);

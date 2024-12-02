@@ -57,7 +57,7 @@ public class RandomDate {
 	String ret = null;
 	try {
 	    ret = format(nextDate());
-	} catch (Exception _) {
+	} catch (Exception ignored) {
 	    Messages.assertErr(false);
 	}
 	return ret;
