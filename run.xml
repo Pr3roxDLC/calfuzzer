@@ -23,7 +23,7 @@
         <delete file="${javato.work.dir}/iidToLine.map"/>
         <delete file="${javato.work.dir}/iidToLine.map.html"/>
         <delete file="${javato.work.dir}/error.log"/>
-        <delete file="${javato.work.dir}/error.list"/>
+        <!--<delete file="${javato.work.dir}/error.list"/>-->
         <delete file="${javato.work.dir}/error.stat"/>
         <delete file="${javato.work.dir}/error.time"/>
         <delete file="${javato.work.dir}/atomicity_data.out"/>
@@ -149,7 +149,7 @@
         </if>
         <stopwatch name="timer" action="start"/>
         <java classname="${javato.app.main.class}"
-              fork="true" dir="${javato.work.dir}" maxmemory="1024m">
+              fork="true" dir="${javato.work.dir}" maxmemory="4048m">
             <arg line="${javato.app.args}"/>
             <jvmarg line="${jvm_args} "/>
             <!--            <sysproperty key="javato.deadlock.goodlock" value="false"/> -->
@@ -1354,7 +1354,7 @@
 	<target name="t_test_lucene">
 		<property name="javato.work.dir" value="${javabenchdir}/lucene-2.3.0"/>
         <property name="javato.app.main.class" value="TestDeadLock"/>
-		<property name="javato.app.class.path" value="${javato.work.dir}/classes:${javato.work.dir}/build/classes/java:${javato.work.dir}/lib/junit-4.7.jar"/>
+		<property name="javato.app.class.path" value="${javato.work.dir}/classes:${javato.work.dir}/build/classes/java:${javato.work.dir}/lib/junit-4.12.jar"/>
         <!--<property name="javato.app.instr.dir"
 				value="${javato.work.dir}/build/classes/java"/>-->
         <property name="javato.instops" value="-i org.apache.lucene -x java"/>

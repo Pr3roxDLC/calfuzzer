@@ -22,7 +22,7 @@
     <path id="calfuzzer.testclasspath">
         <path refid="calfuzzer.classpath"/>
         <pathelement location="classes"/>
-        <pathelement location="lib/junit-4.7.jar"/>
+        <pathelement location="lib/junit-4.12.jar"/>
     </path>
     <target name="init">
         <mkdir dir="classes"/>

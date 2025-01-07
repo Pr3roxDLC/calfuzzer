@@ -56,6 +56,9 @@
     <option name="ADDITIONAL_OPTIONS_STRING" value="" />
     <option name="MAXIMUM_HEAP_SIZE" value="128" />
   </component>
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/benchmarks/error.log" charset="UTF-8" />
+  </component>
   <component name="IdProvider" IDEtalkID="0A4F685BB8EA81D17D547BE64CC53DF6" />
   <component name="InspectionProjectProfileManager">
     <profile version="1.0">
@@ -263,6 +266,20 @@
     <library name="guava-20.0">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/lib/guava-20.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="hamcrest-2.2">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/hamcrest-2.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="junit-4.12">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/junit-4.12.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />

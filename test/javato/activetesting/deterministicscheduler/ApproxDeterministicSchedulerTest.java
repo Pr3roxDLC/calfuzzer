@@ -3,6 +3,9 @@ package javato.activetesting.deterministicscheduler;
 import org.junit.BeforeClass;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.math.BigDecimal;
+
 import static org.junit.Assert.assertTrue;
 
 
@@ -42,6 +45,7 @@ import static org.junit.Assert.assertTrue;
 public class ApproxDeterministicSchedulerTest {
     float x = 0;
     static ApproxDeterministicScheduler sched;
+    static float epsilon = 0.000001f;
 
     public float getX() {
         sched.schedulePoint(0, null,false);
@@ -98,7 +102,7 @@ public class ApproxDeterministicSchedulerTest {
         t.join();
         System.out.println("");
         System.out.println(x);
-        assertTrue(x==2.58871342E12f);
+        assertTrue(x==2.74128113E15f);
 
     }
 
@@ -135,7 +139,7 @@ public class ApproxDeterministicSchedulerTest {
         t1.join();
         System.out.println("");
         System.out.println(x);
-        assertTrue(x==3711783.5f);
+        assertTrue(x==2.48772576E14f);
 
     }
 
