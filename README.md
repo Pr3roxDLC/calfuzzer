@@ -1,4 +1,4 @@
-# Updating calfuzzer for modern Java
+# Updating calfuzzer to modern Java
 
 ## GitHub Repository
 
