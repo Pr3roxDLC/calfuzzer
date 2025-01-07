@@ -4,30 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83c90376-b088-4a4f-9f4a-2cb556e3d452" name="Changes" comment="Got tests to run (hangs after a few tests)">
-      <change afterPath="$PROJECT_DIR$/lib/hamcrest-2.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/junit-4.12.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Calfuzzer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Calfuzzer.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calfuzzer.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/calfuzzer.ipr" afterDir="false" />
+    <list default="true" id="83c90376-b088-4a4f-9f4a-2cb556e3d452" name="Changes" comment="Fix last broken tests">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/calfuzzer.iws" beforeDir="false" afterPath="$PROJECT_DIR$/calfuzzer.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/junit-4.7.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run.xml" beforeDir="false" afterPath="$PROJECT_DIR$/run.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benchmarks/iidToLine.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/iidToLine.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benchmarks/iidToLine.map.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/iidToLine.map.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benchmarks/sor/error.list" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/sor/error.list" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benchmarks/sor/error.log" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/sor/error.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benchmarks/sor/error.stat" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/sor/error.stat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benchmarks/sor/error.time" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/sor/error.time" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benchmarks/sor/iidToLine.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/sor/iidToLine.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benchmarks/sor/iidToLine.map.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/sor/iidToLine.map.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benchmarks/sor/tmpclasses/benchmarks/EDU/oswego/cs/dl/util/concurrent/BrokenBarrierException.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/sor/tmpclasses/benchmarks/EDU/oswego/cs/dl/util/concurrent/BrokenBarrierException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benchmarks/sor/tmpclasses/benchmarks/EDU/oswego/cs/dl/util/concurrent/CyclicBarrier.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/sor/tmpclasses/benchmarks/EDU/oswego/cs/dl/util/concurrent/CyclicBarrier.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benchmarks/sor/tmpclasses/benchmarks/EDU/oswego/cs/dl/util/concurrent/TimeoutException.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/sor/tmpclasses/benchmarks/EDU/oswego/cs/dl/util/concurrent/TimeoutException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benchmarks/sor/tmpclasses/benchmarks/sor/Sor.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/sor/tmpclasses/benchmarks/sor/Sor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benchmarks/sor/tmpclasses/benchmarks/sor/sor_first_row_even.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/sor/tmpclasses/benchmarks/sor/sor_first_row_even.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benchmarks/sor/tmpclasses/benchmarks/sor/sor_first_row_odd.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/sor/tmpclasses/benchmarks/sor/sor_first_row_odd.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/javato/activetesting/deterministicscheduler/ApproxDeterministicSchedulerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/javato/activetesting/deterministicscheduler/ApproxDeterministicSchedulerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +22,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="ProjectErrors" />
@@ -69,7 +51,7 @@
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "vcs.Git",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -223,7 +205,7 @@
       <workItem from="1732527761698" duration="8243000" />
       <workItem from="1733133566675" duration="8156000" />
       <workItem from="1733740026590" duration="6916000" />
-      <workItem from="1736262592436" duration="1623000" />
+      <workItem from="1736262592436" duration="3081000" />
     </task>
     <task id="LOCAL-00002" summary="Add gitignore">
       <option name="closed" value="true" />
@@ -257,7 +239,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733145762072</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fix last broken tests">
+      <option name="closed" value="true" />
+      <created>1736264297500</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1736264297500</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -281,7 +271,8 @@
     <MESSAGE value="Add gitignore" />
     <MESSAGE value="Migrate to Java 1.8" />
     <MESSAGE value="Got tests to run (hangs after a few tests)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Got tests to run (hangs after a few tests)" />
+    <MESSAGE value="Fix last broken tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix last broken tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
