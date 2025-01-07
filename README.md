@@ -5,6 +5,9 @@
 The github repository containing the updated version of calfuzzer can be found at:
 https://github.com/Pr3roxDLC/calfuzzer
 
+## Using the deadlock-fuzzer
+The calfuzzer project requires `ant` and a Java 1.8 JRE to run. After cloning the repository, the deadlock-fuzzer can be executed on a preexisting set of benchmarks by executing the following command from within the root directory of the project: `ant -f run.xml deadlockfuzzer` 
+
 ## Migrating the programm
 Migration of the calfuzzer Programm was done in several steps:
 - Merging the changes done to the sourcecode by [Hünkar Can Tunç et al.](https://zenodo.org/records/7809600) for their project of extending calfuzzer. The changes done by the team were extracted out of the dockerfile included in their artifact.
@@ -15,5 +18,5 @@ Migration of the calfuzzer Programm was done in several steps:
 - Two unit tests remained to be fixed. One was able to be fixed by upgrading the [`junit`](https://junit.org/junit4/) version from `4.7` to `4.12` and including the ['hamcrest'](https://hamcrest.org/) library. The other test required the recalculation of a JVM implementation specific float constant in ['ApproxDeterministicSchedulerTest.java'](https://github.com/Pr3roxDLC/calfuzzer/blame/master/test/javato/activetesting/deterministicscheduler/ApproxDeterministicSchedulerTest.java). With the two changes to the sourcecode, all unit-tests are now able to be successfully executed.
   
 ## Open topics 
-- Reverse-engineering and including the python based test-result-compilation infrastructure that is included in the dockerfile
+- Reverse-engineering and including the python based test-result-compilation infrastructure that is included in the dockerfile, to be able to get more results that the console provides
 - Including own benchmarks and running the deadlock fuzzer on a seperate programm
