@@ -38,4 +38,4 @@ The introduction of the Jigsaw Project in Java 1.9 and above was part of a move 
 - Migrate the deadlock-fuzzer to a more recent Java version, like Java 17 or Java 21
 - Reverse-engineering and including the python based test-result-compilation infrastructure that is included in the dockerfile, to be able to get more results that the console provides
 - Replace hardcoded classpath System properties with a relative path to the location
-- Including own benchmarks and running the deadlock fuzzer on a separate program
+- Including own benchmarks and making it easier for the end user to run the deadlock-fuzzer on their own projects
