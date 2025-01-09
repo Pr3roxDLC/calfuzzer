@@ -8,6 +8,9 @@ https://github.com/Pr3roxDLC/calfuzzer
 ## Using the deadlock-fuzzer
 The calfuzzer project requires `ant` and a Java 1.8 JRE to run. After cloning the repository, the deadlock-fuzzer can be executed on a preexisting set of benchmarks by executing the following command from within the root directory of the project: `ant -f run.xml deadlockfuzzer` 
 
+## Our goal
+The initial goal of this project was to migrate the [calfuzzer project](https://people.eecs.berkeley.edu/~ksen/papers/deadlock.pdf) to a modern version of Java in order to be able to further build upon the existing code and to be able to use its deadlock-fuzzing features on any given modern Java program. The migration to modern Java however posed a major challange, such as [Jigsaw Project](https://openjdk.org/projects/jigsaw/) (an attempt by the JCP to furhter limit the ability for developers to use internal features of the JVM) which was introduced with Java 1.9 or the major design changes done to the Soot library when compared to more recent versions. Because of this the decission was made to only migrate the project to Java 1.8 and to include the work done by [Hünkar Can Tunç et al.](https://zenodo.org/records/7809600) for their 2023 research paper "Sound Dynamic Deadlock Prediction in Linear Time".
+
 ## Migrating the program
 Migration of the calfuzzer program was done in several steps:
 - Merging the changes done to the source code by [Hünkar Can Tunç et al.](https://zenodo.org/records/7809600) for their project of extending calfuzzer. The changes done by the team were extracted out of the dockerfile included in their artifact.
